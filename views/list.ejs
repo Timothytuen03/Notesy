@@ -1,0 +1,53 @@
+<%- include("partials/header") -%>
+
+<!-- <div class="title-container">
+    <div class="tab-container">
+        <button type="menu" class="tab-btn">Tab List </button>
+        <div class="tabs-content">
+            <a href="" class="tab-link">Work</a>
+            <a href="" class="tab-link">School</a>
+        </div>
+    </div>
+</div> -->
+
+<div class="task-container">
+    <aside>
+        <h2>Notesy</h2>
+        <br>
+    
+        <div class="sidebar">
+            <a href="">
+                <i class="fa-regular fa-note-sticky"></i>
+                <p>Tasks</p>
+            </a>
+            <a href="">
+                <i class="fa-regular fa-folder"></i>
+                <p>Projects</p>
+            </a>
+            <a href="">
+                <i class="fa-regular fa-circle-check"></i>
+                <p>Completed</p>
+            </a>
+            <a href="">
+                <i class="fa-solid fa-bars"></i>
+                <p>Settings</p>
+            </a>
+        </div>
+    </aside>
+
+    <div class="cats">
+        <div class="new-cat">
+            <a href="./composeCategory"> + </a>
+        </div>
+        <% categories.forEach(function(index)) { %>
+            <div class="task-category">
+                <a href="/tasks/<%= categories.title%>">
+                    <h2><%= categories.title %></h2>
+                    <p><%= categories.desc %></p>
+                </a>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<%- include("partials/footer") -%>

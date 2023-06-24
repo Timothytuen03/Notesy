@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+:root {
+    --color-light: rgba(132, 139, 200, 0.18);
+    --box-shadow: 0 2rem 2rem var(--color-light);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: 0;
+    border: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: none;
+    display: grid;
+    /* width: 96%; */
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 12rem auto 23rem;
+}
+
+
+
+
+.heading {
+    text-align: center;
+}
+
+aside {
+    background-color: black;
+    color: rgb(240, 225, 225);
+    float: left;
+    height: 100vh;
+    /* transition: all 0.3s ease;; */
+    box-sizing: var(--box-shadow);
+    border-radius: 0px 15px 15px 0px;
+    text-align: center;
+}
+
+aside .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 1rem;
+    /* align-items: center; */
+}
+
+aside .sidebar p {
+    font-size: 0.87rem;
+}
+
+aside .sidebar a {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    height: 3.7rem;
+    gap: 1rem;
+    position: relative;
+    margin-left: 0.3rem;
+    transition: all 0.3s ease;
+    color: rgb(240, 225, 225);
+}
+
+aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 1rem;
+}
+
+
+/* .title-container {
+    display: flex;
+    justify-content: center;
+}
+.tab-container {
+    overflow: hidden;
+}
+
+.tab-btn {
+    font-family: inherit;
+    vertical-align: 0;
+    font-size: 3rem;
+    background-color: black;
+    color: white;
+}
+
+.tabs-content {
+    display: none;
+}
+
+.tab-link {
+    display: block;
+    text-align: center;
+}
+
+.tab-container:hover .tabs-content {
+    display: block;
+} */
+
+.task-container {
+    max-width: none;
+    display: grid;
+    /* width: 96%; */
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 12rem auto;
+}
