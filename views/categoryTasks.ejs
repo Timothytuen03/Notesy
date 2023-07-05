@@ -1,0 +1,60 @@
+<%- include("partials/header") -%>
+
+
+<div class="container">
+    <%- include("partials/sidebar") -%>
+    
+    <div>
+        <h1><%= category.title %></h1>
+        <% category.posts.forEach((post) => { %>
+            <div class="task">
+                <h2><%= post.title %></h2>
+                <p class="task-content"><%= post.content %></p>
+                <div class="task-bottom">
+                    <p>Due <%= post.dueDate %></p>
+                    <form id="deleteTask" action="/task/<%= category.title %>/delete" method="post">
+                        <button class="del-btn" type="submit" name="deleteTask" value="<%= post.title %>" onclick="clicking()">X</button>
+
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+        <div class="task new-post">
+            <button type="button" onclick="openForm()">
+                    <h3>+</h3>
+            </button>
+        </div>
+        <div class="new-task-popup">
+            <div id="task-container" class="task-container">
+                <form action="/task/<%= category.title %>" method="post">
+                    <label for="postTitle">Task Name</label>
+                    <input type="text" id="postTitle" name="postTitle">
+                    <label for="postInfo">Description</label>
+                    <textarea name="postInfo" id="postInfo" cols="30" rows="10" ></textarea>
+                    <label for="postDate">Due Date</label>
+                    <input type="date" id="postDate" name="postDate">
+                    <div>
+                        <button type="submit">Add New Task</button>
+                        <button type="button" onclick="closeForm()">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openForm() { 
+        console.log("open");
+        document.getElementById("task-container").style.display = "block";
+        console.log("clicked");
+    }
+    function closeForm() { 
+        document.getElementById("task-container").style.display = "none";
+    }
+    function clicking() {
+        console.log("clicked");
+    }
+</script>
+
+<%- include("partials/footer") -%>

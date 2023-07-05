@@ -1,8 +1,17 @@
 <%- include("partials/header") -%>
-
-<form action="/compose-category" method="post">
-    <h1>Title</h1>
-    <input type="text" style="background-color: black;">
-</form>
+<div class="container">
+    <%- include("partials/sidebar") -%>
+        <form action="/compose-category" method="post" class="create-category">
+            <label for="catTitle">Title</label>
+            <input type="text" name="catTitle" class="category-title">
+            <label for="catDesc">Category Description</label>
+            <textarea name="catDesc" id="" cols="50" rows="10"></textarea>
+            <div class="category-color">
+                <label for="catColor">Category's Color</label>
+                <input type="color" name="catColor">
+            </div>
+            <button  type="submit" name="button">Publish</button>
+        </form>
+</div>
 
 <%- include("partials/footer") -%>

@@ -10,43 +10,24 @@
     </div>
 </div> -->
 
-<div class="task-container">
-    <aside>
-        <h2>Notesy</h2>
-        <br>
-    
-        <div class="sidebar">
-            <a href="">
-                <i class="fa-regular fa-note-sticky"></i>
-                <p>Tasks</p>
-            </a>
-            <a href="">
-                <i class="fa-regular fa-folder"></i>
-                <p>Projects</p>
-            </a>
-            <a href="">
-                <i class="fa-regular fa-circle-check"></i>
-                <p>Completed</p>
-            </a>
-            <a href="">
-                <i class="fa-solid fa-bars"></i>
-                <p>Settings</p>
-            </a>
-        </div>
-    </aside>
+<div class="container">
+    <%- include("partials/sidebar") -%>
 
     <div class="cats">
-        <div class="new-cat">
-            <a href="./composeCategory"> + </a>
-        </div>
-        <% categories.forEach(function(index)) { %>
-            <div class="task-category">
-                <a href="/tasks/<%= categories.title%>">
-                    <h2><%= categories.title %></h2>
-                    <p><%= categories.desc %></p>
+        <h1>Task Categories</h1>
+        <% categories.forEach(function(index) { %>
+            <div class="task">
+                <a href="/task/<%= index.title%>">
+                    <h2><%= index.title %></h2>
+                    <p class="category-desc-display"><%= index.desc %></p>
+                    <p>Created <%= index.createTime.toDateString() %></p>
+                    <form action="/list/delete"></form>
                 </a>
             </div>
-        <% } %>
+        <% }); %>
+        <div class="task new-cat">
+            <a href="./compose-category"> <h3>+</h3> </a>
+        </div>
     </div>
 </div>
 

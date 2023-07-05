@@ -1,77 +1,62 @@
 <%- include("partials/header") -%>
-<div class="container">
-    <aside>
-        <h2>Notesy</h2>
-        <br>
-    
-        <div class="sidebar">
-            <a href="">
-                <i class="fa-regular fa-note-sticky"></i>
-                <p>Tasks</p>
-            </a>
-            <a href="">
-                <i class="fa-regular fa-folder"></i>
-                <p>Projects</p>
-            </a>
-            <a href="">
-                <i class="fa-regular fa-circle-check"></i>
-                <p>Completed</p>
-            </a>
-            <a href="">
-                <i class="fa-solid fa-bars"></i>
-                <p>Settings</p>
-            </a>
-        </div>
-    </aside>
+<div class="home-container">
+    <%- include("partials/sidebar") -%>
 
     <main>
-        <h1>Home</h1>
-        <div class="nums">
-            <div class="num-tasks">
-                <div class="status">
-                    <h3>In-Progress Tasks</h3>
-                    <p>Number</p>
+        <div class="dash-container">
+            <h1>Home</h1>
+                <div class="nums">
+                    <div class="num-tasks">
+                        <div class="status">
+                            <h3>In-Progress Tasks</h3>
+                            <p>Number</p>
+                        </div>
+                    </div>
+                    <div class="num-projects">
+                        <div class="status">
+                            <h3>In-Progress Projects</h3>
+                            <p>Number</p>
+                        </div>
+                    </div>
+                    <div class="num-complete-task">
+                        <div class="status">
+                            <h3>Completed Tasks</h3>
+                            <p>Number</p>
+                        </div>
+                    </div>
+                    <div class="num-complete-project">
+                        <div class="status">
+                            <h3>Completed Projects</h3>
+                            <p>Number</p>
+                        </div>
+                    </div>  
                 </div>
-            </div>
-            <div class="num-projects">
-                <div class="status">
-                    <h3>In-Progress Projects</h3>
-                    <p>Number</p>
+        
+                <div class="preview">
+                    <div class="task-prev">
+                        <h3>Tasks Preview</h3>
+                        <ul>
+                            <li>Task</li>
+                        </ul>
+                    </div>
+                    <div class="project-prev">
+                        <h3>Projects Preview</h3>
+                        <ul>
+                            <li>Project</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="num-complete-task">
-                <div class="status">
-                    <h3>Completed Tasks</h3>
-                    <p>Number</p>
+    
+                <div class="profile-section">
+                    <div class="profile-card">
+                        
+                    </div>
+                    <div class="profile-info">
+            
+                    </div>
                 </div>
-            </div>
-            <div class="num-complete-project">
-                <div class="status">
-                    <h3>Completed Projects</h3>
-                    <p>Number</p>
-                </div>
-            </div>  
         </div>
-
-        <div class="preview">
-            <div class="task-prev">
-
-            </div>
-            <div class="project-prev">
-
-            </div>
-        </div>
-
     </main>
-
-    <div class="profile-section">
-        <div class="profile-card">
-
-        </div>
-        <div class="profile-info">
-
-        </div>
-    </div>
 </div>
 
 

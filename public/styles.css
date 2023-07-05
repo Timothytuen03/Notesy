@@ -21,16 +21,14 @@ body {
     overflow-x: hidden;
 }
 
-.container {
+.home-container {
     max-width: none;
     display: grid;
     /* width: 96%; */
     margin: 0 auto;
     gap: 1.8rem;
-    grid-template-columns: 12rem auto 23rem;
+    grid-template-columns: 12rem auto;
 }
-
-
 
 
 .heading {
@@ -77,37 +75,80 @@ aside .sidebar a:last-child{
     bottom: 1rem;
 }
 
-
-/* .title-container {
+.dash-container {
     display: flex;
-    justify-content: center;
-}
-.tab-container {
-    overflow: hidden;
+    flex-direction: column;
 }
 
-.tab-btn {
-    font-family: inherit;
-    vertical-align: 0;
-    font-size: 3rem;
-    background-color: black;
-    color: white;
+/* Home Page Numbers Row */
+.nums {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
 }
 
-.tabs-content {
-    display: none;
+.nums-tasks {
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
 
-.tab-link {
-    display: block;
-    text-align: center;
+.num-projects {
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
-.tab-container:hover .tabs-content {
-    display: block;
-} */
+.num-complete-tasks {
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
 
-.task-container {
+.num-complete-project {
+    grid-column-start: 4;
+}
+
+.status {
+    border: 2px solid;
+    padding-left: 0.3rem;
+    height: 10vh;
+}
+
+/* Home Page Preview Row */
+.preview {
+    display: flex;
+    justify-content: start;
+    margin: 5vh 0;
+}
+
+.preview div {
+    border: 2px solid;
+    height: 35vh;
+    width: 49%;
+    padding: 0.5rem;
+}
+
+.task-prev {
+    margin-right: 2%;
+}
+
+/* Home Page Profile */
+.profile-section {
+    display: flex;
+    justify-content: start;
+}
+
+.profile-section div {
+    border: 2px solid;
+    height: 35vh;
+    width: 49%;
+    padding: 0.5rem;
+}
+
+.profile-card {
+    margin-right: 2%;
+}
+
+/* Task Categories Page */
+.container {
     max-width: none;
     display: grid;
     /* width: 96%; */
@@ -115,3 +156,130 @@ aside .sidebar a:last-child{
     gap: 1.8rem;
     grid-template-columns: 12rem auto;
 }
+
+.task {
+    border-radius: 7px;
+    box-shadow: 0 2px 5px #ccc;
+    padding: 10px;
+    width: 240px;
+    height: 150px;
+    margin: 16px;
+    float: left;
+    /* overflow: auto; */
+}
+
+.category-desc-display, .task-content {
+    height: 55%;
+    overflow: auto;
+}
+
+.new-cat, .new-post {
+    text-align: center;
+    font-size:2rem;
+    width: 100px;
+    height: 100px;
+}
+
+.new-cat h3, .new-post h3 {
+    padding: 10px 0;
+}
+
+/* Create New Category Page */
+.create-category{
+    display: flex;
+    flex-direction: column;
+}
+
+.category-title {
+    border: 1px solid;
+    height: 3%;
+    width: 15%;
+    margin-bottom: 1vh;
+}
+
+.create-category textarea {
+    border: 1px solid;
+    width: 80%;
+    margin-bottom: 1vh;
+}
+
+.category-color {
+    margin-bottom: 1vh;
+}
+
+.category-color label{
+    margin-right: 0.5rem;
+}
+
+.create-category button {
+    width: 100px;
+    height: 40px;
+    border-radius: 15%;
+    background-color: black;
+    color: white;
+}
+
+/* Tasks Page */
+.task-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.del-btn {
+    background: none;
+}
+
+/* New Task */
+.new-post button {
+    background-color: transparent;
+    font-size: 2rem;
+    padding: 10px 0;
+    cursor: pointer;
+    width: 100%;
+}
+
+.new-task-popup {
+    /* display: none; */
+    position: relative;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+    background-color: white;
+}
+
+.task-container {
+    display: none;
+    position: fixed;
+    left: 45%;
+    top: 5%;
+    transform: translate(-50%, 5%);
+    border: 3px solid #000;
+    z-index: 9;
+    background-color: white;
+    text-align: left;
+}
+
+.task-container form {
+    max-width: 300px;
+    padding: 20px;
+}
+
+.task-container input, .task-container textarea {
+    border: 1px solid;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.task-container div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.task-container button{
+    background-color: black;
+    color: white;
+    padding: 4px;
+}
+
+
