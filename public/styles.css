@@ -184,6 +184,22 @@ aside .sidebar a:last-child{
     padding: 10px 0;
 }
 
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.del-btn-cat {
+    background: none;
+    width: 20px;
+    text-decoration: solid;
+}
+
+.del-btn-cat:hover {
+    cursor: pointer;
+}
+
 /* Create New Category Page */
 .create-category{
     display: flex;

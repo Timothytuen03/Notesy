@@ -1,0 +1,11 @@
+<%- include("partials/header") -%>
+
+<h1 class="heading">Welcome to Notesy!</h1>
+<h3 class="heading">Log In</h3>
+<form action="/sign-in" method="post">
+    <input type="text" name="username">
+    <input type="password" name="password">
+</form>
+<a href="/create-account">Sign Up</a>
+
+<%- include("partials/footer") -%>

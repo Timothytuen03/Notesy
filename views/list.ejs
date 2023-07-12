@@ -20,8 +20,14 @@
                 <a href="/task/<%= index.title%>">
                     <h2><%= index.title %></h2>
                     <p class="category-desc-display"><%= index.desc %></p>
-                    <p>Created <%= index.createTime.toDateString() %></p>
-                    <form action="/list/delete"></form>
+                    <div class="flex">
+                        <p>Created <%= index.createTime.toDateString() %></p>
+                        <form id="deleteCategory" action="/list/delete" method="post">
+                            <button class="del-btn-cat" value="<%=index.title%>" name="deleteCategory" type="submit">
+                                <i class="fa-regular fa-square-minus"></i>
+                            </button>
+                        </form>
+                    </div>
                 </a>
             </div>
         <% }); %>
@@ -30,5 +36,5 @@
         </div>
     </div>
 </div>
-
+<script src="https://kit.fontawesome.com/480b04fb46.js" crossorigin="anonymous"></script>
 <%- include("partials/footer") -%>

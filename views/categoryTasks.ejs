@@ -13,7 +13,9 @@
                 <div class="task-bottom">
                     <p>Due <%= post.dueDate %></p>
                     <form id="deleteTask" action="/task/<%= category.title %>/delete" method="post">
-                        <button class="del-btn" type="submit" name="deleteTask" value="<%= post.title %>" onclick="clicking()">X</button>
+                        <button class="del-btn" type="submit" name="deleteTask" value="<%= post.title %>">
+                            <i class="fa-regular fa-square-minus"></i>
+                        </button>
 
                     </form>
                 </div>
@@ -51,9 +53,6 @@
     }
     function closeForm() { 
         document.getElementById("task-container").style.display = "none";
-    }
-    function clicking() {
-        console.log("clicked");
     }
 </script>
 
