@@ -80,7 +80,10 @@ app.get("/home", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
 })
 
 app.get("/list", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
-    User.findOne({email: "timothytuen45@gmail.com"}).then(function(postCategories) {
+    console.log("notes & logged in");
+    User.findOne({username: req.user.username}).then(function(postCategories) {
+        console.log(postCategories);
+        console.log(postCategories.notes);
         let categoriesArr = postCategories.notes;
         res.render("list", {categories: categoriesArr});
     }).catch(function(err) {
@@ -104,7 +107,7 @@ app.post("/compose-category", function (req, res) {
         color: color,
         posts: []
     }
-    User.findOne({email: "timothytuen45@gmail.com"}).then(function(user) {
+    User.findOne({username: req.user.username}).then(function(user) {
         user.notes.push(cat);
         user.save().then(() => {
             console.log(user.notes);
@@ -116,7 +119,7 @@ app.post("/compose-category", function (req, res) {
 })
 
 app.get("/task/:name", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
-    User.findOne({email: "timothytuen45@gmail.com"}).then(function(userData) {
+    User.findOne({username: req.user.username}).then(function(userData) {
         const categoryIndex = userData.notes.findIndex(item => item.title === _.lowerCase(req.params.name));
         res.render("categoryTasks", {category: userData.notes[categoryIndex]});
     }).catch(function(err) {
@@ -126,7 +129,7 @@ app.get("/task/:name", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
 });
 
 app.post("/task/:name", function(req, res) {
-    User.findOne({email: "timothytuen45@gmail.com"}).then(function(user) {
+    User.findOne({username: req.user.username}).then(function(user) {
         const post = {
             title: req.body.postTitle,
             content: req.body.postInfo,
@@ -148,7 +151,7 @@ app.post("/task/:name", function(req, res) {
 app.post("/task/:name/delete", function(req, res) {
 
     const task = req.body.deleteTask;
-    User.findOne({email: "timothytuen45@gmail.com"}).then(function(user) {
+    User.findOne({username: req.user.username}).then(function(user) {
         const categoryIndex = user.notes.findIndex(item => item.title === _.lowerCase(req.params.name));
         const postIndex = user.notes[categoryIndex].posts.findIndex(item => item.title === task);
         user.notes[categoryIndex].posts.splice(postIndex, 1);
@@ -163,7 +166,7 @@ app.post("/task/:name/delete", function(req, res) {
 
 app.post("/list/delete", function(req, res) {
     const cat = req.body.deleteCategory;
-    User.findOne({email: "timothytuen45@gmail.com"}).then(function(user) {
+    User.findOne({username: req.user.username}).then(function(user) {
         const categoryIndex = user.notes.findIndex(item => item.title === cat);
         user.notes.splice(categoryIndex, 1);
         user.save().then(() => {
@@ -179,18 +182,18 @@ app.get("/login", function(req, res) {
     res.render("signIn");
 })
 
-app.post("/login", passport.authenticate('local-login', {failureRedirect: '/login'}), function(req, res) {
+app.post("/login", passport.authenticate('local', {failureRedirect: '/login'}), function(req, res) {
     // const usernameSubmitted = req.body.username;
     // const passwordSubmitted = req.body.password;
     console.log(req.user)
-    res.redirect("/");
+    res.redirect("/home");
 })
 
 app.get("/create-account", function(req, res) {
     res.render("createAccount");
 })
 
-app.post("/create-account", passport.authenticate('local-signup', {failureRedirect: '/create-account'}), function(req, res) {
+app.post("/create-account",  function(req, res) {
     const newUserEntry = new User({
         username: req.body.username,
         password: req.body.password,
