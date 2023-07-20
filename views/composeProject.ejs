@@ -1,0 +1,41 @@
+<%- include("partials/header") -%>
+<div class="container">
+    <%- include("partials/sidebar") -%>
+    <form action="/compose-project" method="post" class="create-project">
+        <label for="projectTitle">Your Project's Name</label>
+        <label for="projectDescription">Project Description</label>
+        <label for="techStack">What Tech Stack Will Be Used?</label>
+        <label for="progress">Current Progress:</label>
+        <input type="text" name="projectTitle">
+        <input type="text" name="projectDescription">
+        
+        <select name="progress" id="progress" required>
+            <option value="notStarted">Not Started</option>
+            <option value="beginning">Planning/Beginning Stage</option>
+            <option value="inProgress">In Progress</option>
+            <option value="nearComplete">Nearing Completion</option>
+            <option value="finished">Completed</option>
+            <option value="hold">On Hold</option>
+            <option value="debug">Debugging/Features</option>
+        </select>
+        <div id="techStackInputs">
+            <input type="text" name="techStack[]">
+
+        </div>
+        <button class="add-tech" type="button" onclick="addInput()">Add another input</button>
+        <button type="submit" >Create Project</button>
+    </form>
+</div>
+
+<script>
+    const techStackDiv = document.querySelector('.techStackInputs');
+    function addInput() {
+        console.log("add input");
+        let newTechItem = document.createElement('input');
+        newTechItem.name = 'techStack[]';
+        newTechItem.type = 'text';
+        console.log(newTechItem);
+        document.getElementById('techStackInputs').append(newTechItem);
+    };
+</script>
+<%- include("partials/sidebar") -%>

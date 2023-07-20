@@ -17,9 +17,27 @@ const userSchema = new mongoose.Schema({
         type: Array
     },
     projects: {
-        type: Array
+        type: projectSchema
     }
 });
+
+// const projectSchema = new mongoose.Schema({
+//     title: {
+//         type: String,
+//         required: true
+//     },
+//     description: {
+//         type: String,
+//         required: true
+//     },
+//     techStack: {
+//         type: Array
+//     },
+//     progress: {
+//         type: String,
+//         required: true
+//     }
+// })
 
 userSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', userSchema);

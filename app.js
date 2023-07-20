@@ -18,7 +18,7 @@ app.use(session({  //Set up the express session configuration
     secret: 'tempsecretpass',
     resave: false,
     saveUninitialized: true,
-    cookie: {MaxAge: 60*60*1000} //1 hour
+    cookie: {MaxAge: 24*60*60*1000} //24 hours
 }))
 app.use(passport.initialize()); //Middleware to use Passport with Express
 app.use(passport.session()); //Needed to use express-session with passport
@@ -173,6 +173,52 @@ app.post("/list/delete", function(req, res) {
             res.redirect("/list");
         })
     }).catch(function(err) {
+        console.log(err);
+    })
+})
+
+app.get("/projects", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
+    User.findOne({username: req.user.username}).then((user)=>{
+        const userProjects = user.projects;
+        res.render("projects", {projects: userProjects});
+    }).catch((err) => {
+        console.log(err);
+    })
+})
+
+app.get("/compose-project", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
+    // User.findOne({username: req.user.username}).then((user) => {
+
+    // })
+    res.render("composeProject");
+})
+
+app.post("/compose-project", function(req, res) {
+    User.findOne({username: req.user.username}).then((user) => {
+        const newProject = {
+            projectTitle: _.lowerCase(req.body.projectTitle),
+            projectDescription: req.body.projectDescription,
+            techStack: req.body.techStack,
+            progress: req.body.progress
+        }
+
+        user.projects.push(newProject);
+        user.save().then(() => {
+            res.redirect("/projects");
+        })
+    }).catch(err => {
+        console.log(err);
+    })
+})
+
+app.post("/projects/delete", function(req, res) {
+    User.findOne({username:req.user.username}).then((user) => {
+        const projectIndex = user.projects.findIndex(item => item.projectTitle === req.body.deleteProject);
+        user.projects.splice(projectIndex, 1);
+        user.save().then(()=>{
+            res.redirect("/projects");
+        })
+    }).catch((err) => {
         console.log(err);
     })
 })
