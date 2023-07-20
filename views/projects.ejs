@@ -6,23 +6,32 @@
         <h1>Projects</h1>
         <% projects.forEach((index)=> { %>
             <div class="project-card">
-                <h2><%= index.projectTitle %></h2>
-                <p><%= index.projectDescription %></p>
-                <% if(index.techStack !== null) { %>
-                    <%index.techStack.forEach((tech) => {%>
-                        <p class="tech-stack-item"><%=tech%></p>
-                    <%});%>
-                <%}%>
-                <h3><%=index.progress%></h3>
+                <div class="flex">
+                    <h2><%= index.projectTitle %></h2>
+                    <a href="/edit-project/<%= index.projectTitle %>" >Edit</a>
+                </div>
+                <p class="project-desc"><%= index.projectDescription %></p>
+                <h4>Tech Stack:</h4>
+                <div class="stack-items">
+                    <% if(index.techStack !== null) { %>
+                        <%index.techStack.forEach((tech) => {%>
+                            <p class="tech-stack-item">-<%=tech%></p>
+                        <%});%>
+                    <%}%>
+                </div>
 
-                <form action="/projects/delete" method="post">
-                    <button class="del-btn-cat" value="<%=index.projectTitle%>" name="deleteProject" type="submit">
-                        <i class="fa-regular fa-square-minus"></i>
-                    </button>
-                </form>
+                <div class="flex" style="padding-top: 10px;">
+                    <h4>Status: <%=index.progress%></h4>
+    
+                    <form action="/projects/delete" method="post">
+                        <button class="del-btn-cat" value="<%=index.projectTitle%>" name="deleteProject" type="submit">
+                            <i class="fa-regular fa-square-minus"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         <%});%>
-        <div class="new-project">
+        <div class="task new-project">
             <a href="/compose-project"> <h3>+</h3></a>
         </div>
     </div>

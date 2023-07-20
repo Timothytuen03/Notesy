@@ -9,25 +9,25 @@
                     <div class="num-tasks">
                         <div class="status">
                             <h3>In-Progress Tasks</h3>
-                            <p>Number</p>
+                            <p><%= numTask %></p>
                         </div>
                     </div>
                     <div class="num-projects">
                         <div class="status">
                             <h3>In-Progress Projects</h3>
-                            <p>Number</p>
+                            <p><%= user.projects.length %></p>
                         </div>
                     </div>
                     <div class="num-complete-task">
                         <div class="status">
                             <h3>Completed Tasks</h3>
-                            <p>Number</p>
+                            <p><%= user.completedNotes.length %></p>
                         </div>
                     </div>
                     <div class="num-complete-project">
                         <div class="status">
                             <h3>Completed Projects</h3>
-                            <p>Number</p>
+                            <p><%= user.completedProjects.length %></p>
                         </div>
                     </div>  
                 </div>
@@ -35,15 +35,11 @@
                 <div class="preview">
                     <div class="task-prev">
                         <h3>Tasks Preview</h3>
-                        <ul>
-                            <li>Task</li>
-                        </ul>
+                        
                     </div>
                     <div class="project-prev">
                         <h3>Projects Preview</h3>
-                        <ul>
-                            <li>Project</li>
-                        </ul>
+                        
                     </div>
                 </div>
     

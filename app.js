@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import session from "express-session";
 import passport from "passport";
 import passportLocalMongoose from "passport-local-mongoose";
-import connectEnsureLogin from "connect-ensure-login";
+import connectEnsureLogin, { ensureLoggedIn } from "connect-ensure-login";
 import LocalStrategy from "passport-local";
 // import User from "./models/account";
 const app = express();
@@ -76,7 +76,15 @@ app.get("/", function(req,res) {
 })
 
 app.get("/home", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
-    res.render("home");
+    User.findOne({username: req.user.username}).then((userInfo) => {
+        let numCurrTasks = 0;
+        userInfo.notes.forEach((cat) => {
+            numCurrTasks += cat.posts.length;
+        })
+        res.render("home", {user: userInfo, numTask: numCurrTasks});
+    }).catch((err) => {
+        console.log(err);
+    })
 })
 
 app.get("/list", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
@@ -164,6 +172,27 @@ app.post("/task/:name/delete", function(req, res) {
     })
 })
 
+app.post("/task/:name/complete", function(req, res) {
+    const task = req.body.completeTask;
+    User.findOne({username:req.user.username}).then((user) => {
+        const categoryIndex = user.notes.findIndex(item => item.title === _.lowerCase(req.params.name));
+        const category = user.notes[categoryIndex].title;
+        const postIndex = user.notes[categoryIndex].posts.findIndex(item => item.title === task);
+        const post = user.notes[categoryIndex].posts[postIndex];
+        user.completedNotes.push({
+            categoryName: category,
+            postTitle: post.title,
+            postContent: post.content,
+            postDue: post.dueDate
+        })
+        user.notes[categoryIndex].posts.splice(postIndex, 1);
+        user.markModified('notes');
+        user.save().then(() => {
+            res.redirect("/task/" + category);
+        })
+    })  
+})
+
 app.post("/list/delete", function(req, res) {
     const cat = req.body.deleteCategory;
     User.findOne({username: req.user.username}).then(function(user) {
@@ -201,11 +230,17 @@ app.post("/compose-project", function(req, res) {
             techStack: req.body.techStack,
             progress: req.body.progress
         }
-
-        user.projects.push(newProject);
-        user.save().then(() => {
-            res.redirect("/projects");
-        })
+        if(newProject.progress === "Completed") {
+            user.completedProjects.push(newProject);
+            user.save().then(()=> {
+                res.redirect("/projects");
+            })
+        } else {
+            user.projects.push(newProject);
+            user.save().then(() => {
+                res.redirect("/projects");
+            })
+        }
     }).catch(err => {
         console.log(err);
     })
@@ -222,6 +257,44 @@ app.post("/projects/delete", function(req, res) {
         console.log(err);
     })
 })
+
+app.get("/edit-project/:projectName", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
+    console.log(req.params.projectName);
+    User.findOne({username: req.user.username}).then((user)=> {
+        const projectIndex = user.projects.findIndex(item => item.projectTitle === req.params.projectName);
+        res.render("editProject", {project: user.projects[projectIndex]});
+    })
+});
+
+app.post("/edit-project/:projectName", function(req, res) {
+    User.findOne({username: req.user.username}).then((user)=> {
+        const projectIndex = user.projects.findIndex(item => item.projectTitle === req.params.projectName);
+        user.projects[projectIndex].projectTitle = req.body.projectTitle;
+        user.projects[projectIndex].projectDescription = req.body.projectDescription;
+        user.projects[projectIndex].techStack = req.body.techStack;
+        user.projects[projectIndex].progress = req.body.progress;
+        user.markModified('projects');
+        if(req.body.progress === "Completed") {
+            const completedProj = user.projects[projectIndex];
+            user.projects.splice(projectIndex, 1);
+            user.completedProjects.push(completedProj);
+        }
+        user.save().then(()=> {
+            res.redirect("/projects");
+        })
+    }).catch((err) => {
+        console.log(err);
+    })
+})
+
+app.get("/completed", connectEnsureLogin.ensureLoggedIn(), function(req, res) {
+    User.findOne({_id: req.user._id}).then((user)=> {
+        res.render("completed", {completedTasks: user.completedNotes, completedProjects: user.completedProjects});
+    })
+})
+
+
+
 
 
 app.get("/login", function(req, res) {

@@ -18,6 +18,12 @@ const userSchema = new mongoose.Schema({
     },
     projects: {
         type: projectSchema
+    },
+    completedNotes: {
+        type: Array
+    },
+    completedProjects: {
+        type: Array
     }
 });
 

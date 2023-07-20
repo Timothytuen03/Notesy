@@ -17,6 +17,12 @@ let Account = new Schema({
     },
     projects: {
         type: Array
+    },
+    completedNotes: {
+        type: Array
+    },
+    completedProjects: {
+        type: Array
     }
 })
 

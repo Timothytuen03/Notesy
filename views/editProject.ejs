@@ -1,22 +1,24 @@
 <%- include("partials/header") -%>
 <div class="container">
     <%- include("partials/sidebar") -%>
-    <form action="/compose-project" method="post" class="create-project">
+    <form action="/edit-project/<%=project.projectTitle%>" method="post" class="create-project">
         <label for="projectTitle">Your Project's Name</label>
-        <input type="text" name="projectTitle">
+        <input type="text" name="projectTitle" value="<%=project.projectTitle%>">
         <label for="projectDescription">Project Description</label>
-        <textarea name="projectDescription" id="" cols="30" rows="10"></textarea>
+        <textarea name="projectDescription" id="" cols="30" rows="10"><%=project.projectDescription%></textarea>
         
         <label for="techStack">What Tech Stack Will Be Used?</label>
         <div id="techStackInputs">
-            <div class="flex">
-                <input type="text" name="techStack[]" class="stack-input-item">
-                <button class="remove-stack-item" type="button" onclick="removeStackItem()">X</button>
-            </div>
+            <% project.techStack.forEach((item) => { %>
+                <div class="flex">
+                    <input type="text" name="techStack[]" class="stack-input-item" value="<%= item %>">
+                    <button class="remove-stack-item" type="button" onclick="removeStackItem()">X</button>
+                </div>
+            <%})%>
         </div>
         <button class="add-tech" type="button" onclick="addInput()">Add another input</button>
         <label for="progress">Current Progress:</label>
-        <select name="progress" id="progress" required>
+        <select name="progress" id="progress" value="<%=project.progress%>" required>
             <option value="" disabled selected hidden>Select Your Progress</option>
             <option value="Not Started">Not Started</option>
             <option value="Planning/Beginning Stage">Planning/Beginning Stage</option>
@@ -26,7 +28,7 @@
             <option value="On Hold">On Hold</option>
             <option value="Debugging/Features">Debugging/Features</option>
         </select>
-        <button type="submit" class="create-project-btn">Create Project</button>
+        <button type="submit" class="create-project-btn">Update Project</button>
     </form>
 </div>
 
