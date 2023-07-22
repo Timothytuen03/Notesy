@@ -2,11 +2,48 @@
 
 <div class="container">
     <%- include("partials/sidebar") -%>
-    <div class="completed-tasks-container">
-
-    </div>
-    <div class="completed-projects-container">
-
+    <div>
+        <div class="completed-container">
+            <div>
+                <h3>Completed Tasks</h3>
+                <div class="completed-titles">
+                    <p>Task Name</p>
+                    <p>Category</p>
+                    <p>Date Completed</p>
+                </div>
+            </div>
+            <div class="completed-tasks-container">
+                <%completedTasks.forEach((task) => { %>
+                    <p style="text-decoration: underline;"><strong><%=task.postTitle%></strong></p>
+                    <p><%=task.categoryName%></p>
+                    <div class="flex">
+                        <p><%=task.dateComplete%>
+                            <form action="/completed/delete-task" method="post">
+                                <button type="submit" value="<%=task.postTitle%>" name="deleteCompleteTask" class="del-btn del-comp-btn">Delete</button>
+                            </form>
+                        </p>
+                    </div>
+                <%})%>
+            </div>
+            <div>
+                <h3>Completed Projects</h3>
+                <div class="completed-titles">
+                    <p>Project Name</p>
+                    <p>Date Created</p>
+                    <p>Date Completed</p>
+                </div>
+            </div>
+            <div class="completed-projects-container">
+                <%completedProjects.forEach((project) => { %>
+                    <p style="text-decoration: underline;"><strong><%=project.projectTitle%></strong></p>
+                    <p><%=project.dateCreated%></p>
+                    <p><%=project.dateComplete%>
+                        <a href="/edit-project/<%=project.projectTitle%>">edit</a>
+                    </p>
+                <%})%>
+    
+            </div>
+        </div>
     </div>
 </div>
 

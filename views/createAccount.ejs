@@ -1,11 +1,17 @@
 <%- include("partials/header") -%>
 
-<form action="/create-account" method="post">
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <button type="submit">Create Account</button>
-</form>
+<h1 class="heading">Create An Account!</h1>
+<div class="welcome-page">
+    <form action="/create-account" method="post" class="login-form">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <label for="password">Confirm Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required>
+        <button type="submit" class="create-acct-btn">Create Account</button>
+    </form>
+
+</div>
 
 <%- include("partials/footer") -%>

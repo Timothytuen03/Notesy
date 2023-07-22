@@ -12,16 +12,18 @@
                 <p class="task-content"><%= post.content %></p>
                 <div class="task-bottom">
                     <p>Due <%= post.dueDate %></p>
-                    <form action="/task/<%= category.title %>/complete" method="post">
-                        <button class="del-btn" type="submit" name="completeTask" value="<%= post.title %>">
-                            <p>Done</p>
-                        </button>
-                    </form>
-                    <form id="deleteTask" action="/task/<%= category.title %>/delete" method="post">
-                        <button class="del-btn" type="submit" name="deleteTask" value="<%= post.title %>">
-                            <i class="fa-regular fa-square-minus"></i>
-                        </button>
-                    </form>
+                    <div class="flex" style="justify-content: right;">
+                        <form action="/task/<%= category.title %>/complete" method="post" >
+                            <button class="del-btn" type="submit" name="completeTask" value="<%= post.title %>" style="margin-right: 3px;">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </button>
+                        </form>
+                        <form id="deleteTask" action="/task/<%= category.title %>/delete" method="post">
+                            <button class="del-btn" type="submit" name="deleteTask" value="<%= post.title %>">
+                                <i class="fa-regular fa-square-minus"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         <% }) %>
