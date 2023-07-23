@@ -23,7 +23,7 @@ app.use(session({  //Set up the express session configuration
 app.use(passport.initialize()); //Middleware to use Passport with Express
 app.use(passport.session()); //Needed to use express-session with passport
 
-mongoose.connect('mongodb+srv://ttuen:ij9S3lEWY4mWOjW8@notesydb.8qixcdm.mongodb.net/NotesyDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://(user>:<password>@notesydb.8qixcdm.mongodb.net/NotesyDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 // const User = mongoose.model("User", userSchema);
